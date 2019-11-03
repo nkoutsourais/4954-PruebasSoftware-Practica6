@@ -3,7 +3,7 @@ package draughts.controllers;
 import draughts.models.*;
 
 public abstract class Controller {
-    
+
     protected Game game;
 
     protected State state;

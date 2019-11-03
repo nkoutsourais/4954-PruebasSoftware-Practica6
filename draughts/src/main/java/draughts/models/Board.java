@@ -2,7 +2,7 @@ package draughts.models;
 
 public class Board {
 
-  private Square[][] squares;
+    private Square[][] squares;
     static final int DIMENSION = 8;
 
     Board() {
@@ -26,10 +26,6 @@ public class Board {
                 }
             }
         }
-    }
-
-    public Color getColor(Coordinate coordinate) {
-        return this.squares[coordinate.getRow()][coordinate.getColumn()].getColor();
     }
 
     public Piece getPiece(Coordinate coordinate) {
@@ -79,13 +75,13 @@ public class Board {
         return string;
     }
 
-	public boolean containsPieces(Color color) {
+    public boolean containsPieces(Color color) {
         for (int i = 0; i < Board.DIMENSION; i++) {
             for (int j = 0; j < Board.DIMENSION; j++) {
-                if(!this.squares[i][j].isEmpty() && this.squares[i][j].getColor().equals(color))
+                if (!this.squares[i][j].isEmpty() && this.squares[i][j].getPiece().getColor().equals(color))
                     return true;
             }
         }
         return false;
-	}
+    }
 }

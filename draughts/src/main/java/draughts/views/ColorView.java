@@ -4,11 +4,8 @@ import draughts.models.Color;
 
 class ColorView {
 
-    static final String[] MESSAGES = { 
-        "Blancas",
-        "Negras"
-    };
-    
+    static final String[] MESSAGES = { "Blancas", "Negras" };
+
     final Color color;
 
     ColorView(Color color) {
@@ -16,6 +13,6 @@ class ColorView {
     }
 
     public String getMessage() {
-		return ColorView.MESSAGES[this.color.ordinal()];
-	}
+        return ColorView.MESSAGES[this.color.ordinal()];
+    }
 }

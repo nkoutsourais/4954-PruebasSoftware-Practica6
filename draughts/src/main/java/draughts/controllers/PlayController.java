@@ -30,7 +30,7 @@ public class PlayController extends Controller {
         this.state.next();
     }
 
-	public boolean isFinishGame() {
-		return this.game.isFinishGame();
-	}
+    public boolean isFinishGame() {
+        return this.game.isFinished();
+    }
 }

@@ -6,7 +6,7 @@ public class Game {
 	private Turn turn;
 
 	public Game() {
-		reset();	
+		reset();
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {
@@ -45,10 +45,6 @@ public class Game {
 		return null;
 	}
 
-	public Color getColor(Coordinate coordinate) {
-		return this.board.getColor(coordinate);
-	}
-
 	@Override
 	public String toString() {
 		return this.board.toString();
@@ -63,7 +59,7 @@ public class Game {
 		return this.turn.getColor();
 	}
 
-	public boolean isFinishGame() {
+	public boolean isFinished() {
 		return !this.board.containsPieces(this.turn.getColor());
 	}
 }

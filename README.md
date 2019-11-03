@@ -1,11 +1,11 @@
-## 4954-PruebasSoftware-Practica5
-### Practica 5
-* Fecha de entrega: 28/10/2019
+## 4954-PruebasSoftware-Practica6
+### Practica 6
+* Fecha de entrega: 04/11/2019
 * Integrantes:
   * Neo Koutsourais
 
 
-## Diagrama MasterMind
+## Diagrama Damas
 
 <p align="center">
   <img alt="" src="diagrama1.svg">
@@ -40,21 +40,21 @@ ConsoleView ..> ResumeController
 
 class StartView {
 }
+StartView *-down-> MessageView
 
 class PlayView {
 }
+PlayView *-down-> ColorView
+PlayView *-down-> ErrorView
+PlayView *-down-> MessageView
 
 class ResumeView {
 }
+ResumeView *-down-> MessageView
 
 ConsoleView *-down-> StartView
 ConsoleView *-down-> PlayView
 ConsoleView *-down-> ResumeView
-
-StartView *-down-> BoardView
-PlayView *-down-> BoardView
-BoardView ..> SquareView
-SquareView ..> PieceView
 
 View ..> Controller
 AcceptController <|-down- View
@@ -87,41 +87,40 @@ class StartController{
  + start():void
 }
 
-class MoveController{
-  + move(Coordinate... coordinates):Error 
-}
-
-class CancelController{
-  + cancel():void
-}
-
 class ResumeController{
  + resume(boolean newGame):void
 }
 
 class PlayController{
-  + move(Coordinate... coordinates):Error
-  + getPiece(Coordinate origin):Piece
-  + getTurn():Turn
-  + cancel():void
+  + move(Coordinate origin, Coordinate target):Error
+  + printGame():String
+  + getTurnColor():Color
+  + nextState():void
+  + isFinishGame():boolean
 }
 PlayController ..> Coordinate
 
 PlayView ..> Coordinate
 
 class Coordinate{
+  + Coordinate(int row, int column)
+  + isValid():boolean
+  + isDiagonal(Coordinate coordinate):boolean
+  + diagonalDistance(Coordinate coordinate):int
+  + betweenDiagonal(Coordinate coordinate):Coordinate
+  + isBlack():boolean 
+  + toString():String
+  + hashCode():int
+  + equals(Object obj):boolean
+  ~ getRow():int
+  ~ getColumn():int
 }
 
-PlayController *-down-> CancelController
-PlayController *-down-> MoveController
-
-
 class Game{
-  + move(Coordinate... coordinates):Error
-  + getPiece(Coordinate origin):Piece
+  + move(Coordinate origin, Coordinate target):Error
+  + getTurnColor():Color
   + isFinished():boolean
-  + isWinner():boolean
-  + isTie():boolean
+  + toString():String
   + reset():void
 }
 Game *-down-> Board
@@ -129,33 +128,33 @@ Game *-down-> Turn
 Game ..> Error
 
 class Board{
-  + move(Coordinate... coordinates):Error
-  + getPiece(Coordinate origin):Piece
-  + isMovementsAllowed():boolean
-  + isMovementsAllowed(Color):boolean 
-  + Contains(Color):boolean
+  + move(Coordinate origin, Coordinate target):Error
+  + getPiece(Coordinate coordinate):Piece
+  + isEmpty(Coordinate coordinate):boolean
+  + remove(Coordinate coordinate):void
+  + containsPieces(Color):boolean
+  + toString():String
 }
 Board *-down-> "8x8" Square
 Board *-down-> "1..2x12" Piece
 Board ..> Error
 
 class Square{
-  + getPiece():Piece
+  ~ put(Piece piece)
+  ~ getPiece():Piece
+  ~ remove():Piece
+  + isEmpty():boolean
+  + 
 }
 Square  --> "0..1" Piece
 
-abstract class Piece{
+class Piece{
+  ~ Piece(Color color)
   + getColor():Color 
+  + isBlack():boolean
+  + isAdvanced(Coordinate origin, Coordinate target):boolean
 }
-Piece <|-down- Peon
-Piece <|-down- Dama
 Piece *--> Color 
-
-class Peon{
-}
-
-class Dama{
-}
 
 enum Color{
     WHITE
@@ -163,7 +162,8 @@ enum Color{
 }
 
 class Turn{
-  + next():void
+  + change():void
+  + isColor(Color color):boolean
   + getColor():Color 
 }
 Turn *--> Color
@@ -183,13 +183,15 @@ enum StateValue{
 }
 
 enum Error{
-  DISTANCE, 
-	OCCUPED, 
-	NO_PIECE, 
-	COORDINATES, 
-	BAD_MOVE, 
-	CAPTURE_EXCED, 
-	NO_TURN
+  OUT_COORDINATE, 
+  EMPTY_ORIGIN, 
+  OPPOSITE_PIECE, 
+  NOT_DIAGONAL,
+  NOT_EMPTY_TARGET, 
+  EATING_EMPTY,
+  NOT_ADVANCED,
+  BAD_DISTANCE, 
+  INCORRECT_COMMAND
 }
 
 @enduml

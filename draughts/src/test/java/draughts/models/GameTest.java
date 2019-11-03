@@ -12,7 +12,7 @@ public class GameTest {
     public GameTest() {
         game = new Game();
     }
-
+/*
     @Test()
     public void testGivenGameWhenMoveWithOuterCoordinateThenOutCoordinateError() {
         Coordinate[][] coordinates = new Coordinate[][] { { new Coordinate(5, 6), new Coordinate(4, 7) },
@@ -112,5 +112,5 @@ public class GameTest {
     @Test
     public void testGivenGameWhenMoveBadDistanceThenError() {
         assertEquals(Error.BAD_DISTANCE, this.game.move(new Coordinate(5, 0), new Coordinate(2, 3)));
-    }
+    }*/
 }
