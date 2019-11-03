@@ -18,9 +18,10 @@ class PlayView extends WithConsoleView {
         do {
             String title = MessageView.TURN.getMessage() + new ColorView(playController.getTurnColor()).getMessage();
             String command = this.console.readString(title + ": ");
-            if (command.equals(CANCEL_PLAY))
+            if (command.equals(CANCEL_PLAY)) {
                 playController.nextState();
-            else {
+                break;
+            } else {
                 if (pattern.matcher(command).matches()) {
                     int origin = Integer.parseInt(command.substring(0, 2));
                     int target = Integer.parseInt(command.substring(3, 5));
@@ -30,12 +31,11 @@ class PlayView extends WithConsoleView {
                 }
                 if (error != null) {
                     console.writeln(new ErrorView(error).getMessage());
+                } else if (playController.isFinishGame()) {
+                    console.writeln(new ColorView(playController.getTurnColor()).getMessage() + " " + MessageView.FINAL.getMessage());
+                    playController.nextState();
                 }
             }
         } while (error != null);
-        if (playController.isFinishGame()) {
-            console.writeln(new ColorView(playController.getTurnColor()).getMessage() + " " + MessageView.FINAL.getMessage());
-            playController.nextState();
-        }
     }
 }

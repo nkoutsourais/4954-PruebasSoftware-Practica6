@@ -5,7 +5,9 @@ import draughts.utils.YesNoDialog;
 
 class ResumeView {
 
+	YesNoDialog dialog = new YesNoDialog();
+
 	public void interact(ResumeController resumeController) {
-		resumeController.resume(new YesNoDialog().read(MessageView.RESUME.getMessage()));
+		resumeController.resume(dialog.read(MessageView.RESUME.getMessage()));
 	}
 }

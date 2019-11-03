@@ -6,7 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 
-  PlayControllerTest.class, 
   ResumeControllerTest.class, 
   StartControllerTest.class
 })

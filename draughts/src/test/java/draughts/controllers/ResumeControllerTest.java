@@ -1,31 +1,44 @@
 package draughts.controllers;
 
-import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import draughts.models.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ResumeControllerTest {
 
-    State state = new State();
-    ResumeController resumeController;
+    @Mock
+    State state;
 
-    public ResumeControllerTest() {
-        while(state.getValueState() != StateValue.FINAL)
-            state.next();
-        resumeController = new ResumeController(new Game(), state);
+    @Mock
+    Game game;
+
+    @Before
+    public void before(){
+        when(state.getValueState()).thenReturn(StateValue.FINAL);
     }
-
+    
     @Test
-    public void givenResumeControllerWhenNewGameThenStateIsInitial() {
+    public void givenResumeControllerWhenNewGameThenResetGame() {
+        ResumeController resumeController = new ResumeController(game, state);
         resumeController.resume(true);
-        assertEquals(StateValue.INITIAL, state.getValueState());
+        verify(state).reset();
+        verify(game).reset();
+        verify(state, never()).next();
     }
 
     @Test
-    public void givenResumeControllerWhenExitThenStateIsExit() {
+    public void givenResumeControllerWhenExitThenExitGame() {
+        ResumeController resumeController = new ResumeController(new Game(), state);
         resumeController.resume(false);
-        assertEquals(StateValue.EXIT, state.getValueState());
+        verify(state, never()).reset();
+        verify(game, never()).reset();
+        verify(state).next();
     }
 }

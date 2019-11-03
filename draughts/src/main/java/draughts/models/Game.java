@@ -13,12 +13,13 @@ public class Game {
 		if (!origin.isValid() || !target.isValid()) {
 			return Error.OUT_COORDINATE;
 		}
-		if (board.isEmpty(origin)) {
+		if (this.board.isEmpty(origin)) {
 			return Error.EMPTY_ORIGIN;
-		}
-		Color color = this.board.getPiece(origin).getColor();
-		if (!this.turn.isColor(color)) {
-			return Error.OPPOSITE_PIECE;
+		} else {
+			Color color = this.board.getPiece(origin).getColor();
+			if (!this.turn.isColor(color)) {
+				return Error.OPPOSITE_PIECE;
+			}
 		}
 		if (!origin.isDiagonal(target)) {
 			return Error.NOT_DIAGONAL;

@@ -1,4 +1,4 @@
-package draughts;
+package draughts.views;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -6,9 +6,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 
-  draughts.controllers.AllTest.class, 
-  draughts.models.AllTest.class, 
-  draughts.views.AllTest.class, 
+  PlayViewTest.class, 
+  ResumeViewTest.class, 
+  StartViewTest.class
 })
 public class AllTest {
 
