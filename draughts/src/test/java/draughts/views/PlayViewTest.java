@@ -10,15 +10,12 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import draughts.controllers.PlayController;
 import draughts.models.Color;
-import draughts.models.Error;
 import draughts.utils.Console;
 
 @RunWith(MockitoJUnitRunner.class)
