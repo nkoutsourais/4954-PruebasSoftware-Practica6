@@ -30,9 +30,6 @@ public class PlayViewTest {
     @Mock
     Console console;
 
-    @Captor
-    private ArgumentCaptor<Error> captor;
-
     @InjectMocks
     PlayView playView;
 
